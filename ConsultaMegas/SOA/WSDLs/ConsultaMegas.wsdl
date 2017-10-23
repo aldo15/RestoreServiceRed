@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions name="ConsultaMegas" targetNamespace="http://xmlns.oracle.com/SalesforceDesa/ConsultaMegas/ConsultaMegas" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:client="http://xmlns.oracle.com/SalesforceDesa/ConsultaMegas/ConsultaMegas" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype">
+   <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <import namespace="http://xmlns.oracle.com/SalesforceDesa/ConsultaMegas/ConsultaMegas" schemaLocation="../Schemas/ConsultaMegas.xsd"/>
+      </schema>
+   </wsdl:types>
+   <wsdl:message name="ConsultaMegasRequestMessage">
+      <wsdl:part name="payload" element="client:process"/>
+   </wsdl:message>
+   <wsdl:message name="ConsultaMegasResponseMessage">
+      <wsdl:part name="payload" element="client:processResponse"/>
+   </wsdl:message>
+   <wsdl:portType name="ConsultaMegas">
+      <wsdl:operation name="process">
+         <wsdl:input message="client:ConsultaMegasRequestMessage"/>
+         <wsdl:output message="client:ConsultaMegasResponseMessage"/>
+      </wsdl:operation>
+   </wsdl:portType>
+   <plnk:partnerLinkType name="ConsultaMegas">
+      <plnk:role name="ConsultaMegasProvider" portType="client:ConsultaMegas"/>
+   </plnk:partnerLinkType>
+</wsdl:definitions>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+        targetNamespace="http://xmlns.oracle.com/SalesforceDesa/ConsultaCiudad/ConsultaCiudad"
+        xmlns="http://www.w3.org/2001/XMLSchema">
+  <element name="process">
+    <complexType>
+      <sequence>
+        <element name="Login">
+          <complexType>
+            <sequence>
+              <element name="User" type="string"/>
+              <element name="Password" type="string"/>
+              <element name="Ip" type="string"/>
+            </sequence>
+          </complexType>
+        </element>
+        <element name="IdCuentaBRM" type="string" minOccurs="0"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element name="processResponse">
+    <complexType>
+      <sequence>
+        <element name="Result">
+          <complexType>
+            <sequence>
+              <element name="Result" type="string"/>
+              <element name="IdResult" type="string"/>
+              <element name="Description" type="string"/>
+            </sequence>
+          </complexType>
+        </element>
+        <element name="Ciudad" type="string"/>
+      </sequence>
+    </complexType>
+  </element>
+</schema>

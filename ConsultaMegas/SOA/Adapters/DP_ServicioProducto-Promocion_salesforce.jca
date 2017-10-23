@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<adapter-config name="DP_ServicioProducto-PromocionPortType" adapter="salesforce" wsdlLocation="../WSDLs/DP_ServicioProducto-Promocion.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+   <connection-factory location="cloud/CloudAdapter">
+      <non-managed-connection managedConnectionFactoryClassName="oracle.cloud.connector.salesforce.SalesforceConnectionFactory">
+         <property name="targetWSDLURL" value="../WSDLs/enterpriseProd3.0.wsdl"/>
+         <property name="csfkey" value="keySalesforceProd"/>
+         <property name="csfMap" value="SOA"/>
+         <property name="applicationVersion" value="38.0"/>
+      </non-managed-connection>
+   </connection-factory>
+   <endpoint-interaction portType="DP_ServicioProducto-PromocionPortType" operation="query">
+      <interaction-spec className="oracle.tip.adapter.cloud.CloudInteractionSpec">
+         <property name="targetOperation" value="query"/>
+         <property name="operationPath" value=""/>
+         <property name="oracle.cloud.rt.sfdcAdapterNamespace" value="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegas/DP_ServicioProducto_Promocion#new"/>
+         <property name="selectedObjects" value="DP_ServicioProducto__c,QueryParameters"/>
+         <property name="oracle.cloud.rt.queryString" value="SELECT   Id,   Name,   Estatus__c,   TipoProducto__c,   DP_PlanServicio__c,   DP_PlanServicio__r.TipoServicio__c,   DP_ProductoCaracteristicaId__c,   DP_ProductoCaracteristicaId__r.Estatus__c,   DP_ProductoCaracteristicaId__r.EsWiFi__c,   DP_ProductoCaracteristicaId__r.VelocidadBajada__c,   DP_ProductoCaracteristicaId__r.VelocidadSubida__c,   DP_ProductoCaracteristicaId__r.ProductoId__c,   DP_ProductoCaracteristicaId__r.ProductoId__r.IdBrmForward__c FROM DP_ServicioProducto__c WHERE DP_ProductoCaracteristicaId__r.ProductoId__r.IdBrmForward__c = '&amp;IdBrmForward__c' AND Id = '&amp;Id' "/>
+         <property name="oracle.cloud.rt.suppressResponse" value="false"/>
+      </interaction-spec>
+   </endpoint-interaction>
+</adapter-config>

@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<composite name="ConsultaCanales" revision="1.1" label="2016-10-01_22-58-19_636" mode="active" state="on" xmlns="http://xmlns.oracle.com/sca/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:orawsp="http://schemas.oracle.com/ws/2006/01/policy" xmlns:ui="http://xmlns.oracle.com/soa/designer/" xmlns:sca-ext="http://xmlns.oracle.com/sca/1.0-ext">
+   <import namespace="http://xmlns.oracle.com/SalesforceDesa/ConsultaCanales/ConsultaCanales" location="WSDLs/ConsultaCanales.wsdl" importType="wsdl"/>
+   <import namespace="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/DP_PlanCiudad_Incluidos" location="WSDLs/DP_PlanCiudad-Incluidos.wsdl" importType="wsdl"/>
+   <import namespace="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/DP_ProductoCaracterstica" location="WSDLs/DP_ProductoCaracterstica.wsdl" importType="wsdl"/>
+   <import namespace="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/DP_PromocionPlan_Parrilla" location="WSDLs/DP_PromocionPlan-Parrilla.wsdl" importType="wsdl"/>
+   <import namespace="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/DP_PromocionServicioProducto" location="WSDLs/DP_PromocionServicioProducto.wsdl" importType="wsdl"/>
+   <import namespace="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/DP_ServicioProducto_Adicional" location="WSDLs/DP_ServicioProducto-Adicional.wsdl" importType="wsdl"/>
+   <import namespace="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/Cat_Catalogo" location="WSDLs/Cat_Catalogo.wsdl" importType="wsdl"/>
+   <service name="consultacanales_client_ep" ui:wsdlLocation="WSDLs/ConsultaCanales.wsdl">
+      <interface.wsdl interface="http://xmlns.oracle.com/SalesforceDesa/ConsultaCanales/ConsultaCanales#wsdl.interface(ConsultaCanales)"/>
+      <binding.ws port="http://xmlns.oracle.com/SalesforceDesa/ConsultaCanales/ConsultaCanales#wsdl.endpoint(consultacanales_client_ep/ConsultaCanales_pt)"/>
+   </service>
+   <property name="productVersion" type="xs:string" many="false">12.1.3.0.0</property>
+   <property name="compositeID" type="xs:string" many="false">c796328f-e57e-4677-9e85-944628adf8fb</property>
+   <component name="ConsultaCanales" version="2.0">
+      <implementation.bpel src="BPEL/ConsultaCanales.bpel"/>
+      <componentType>
+         <service name="consultacanales_client" ui:wsdlLocation="WSDLs/ConsultaCanales.wsdl">
+            <interface.wsdl interface="http://xmlns.oracle.com/SalesforceDesa/ConsultaCanales/ConsultaCanales#wsdl.interface(ConsultaCanales)"/>
+         </service>
+         <reference name="DP_PlanCiudad-Incluidos" ui:wsdlLocation="WSDLs/DP_PlanCiudad-Incluidos.wsdl">
+            <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/DP_PlanCiudad_Incluidos#wsdl.interface(DP_PlanCiudad-IncluidosPortType)"/>
+         </reference>
+         <reference name="DP_ProductoCaracterstica" ui:wsdlLocation="WSDLs/DP_ProductoCaracterstica.wsdl">
+            <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/DP_ProductoCaracterstica#wsdl.interface(DP_ProductoCaractersticaPortType)"/>
+         </reference>
+         <reference name="DP_PromocionPlan-Parrilla" ui:wsdlLocation="WSDLs/DP_PromocionPlan-Parrilla.wsdl">
+            <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/DP_PromocionPlan_Parrilla#wsdl.interface(DP_PromocionPlan-ParrillaPortType)"/>
+         </reference>
+         <reference name="DP_PromocionServicioProducto" ui:wsdlLocation="WSDLs/DP_PromocionServicioProducto.wsdl">
+            <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/DP_PromocionServicioProducto#wsdl.interface(DP_PromocionServicioProductoPortType)"/>
+         </reference>
+         <reference name="DP_ServicioProducto-Adicional" ui:wsdlLocation="WSDLs/DP_ServicioProducto-Adicional.wsdl">
+            <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/DP_ServicioProducto_Adicional#wsdl.interface(DP_ServicioProducto-AdicionalPortType)"/>
+         </reference>
+         <reference name="Cat_Catalogo" ui:wsdlLocation="WSDLs/Cat_Catalogo.wsdl">
+            <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/Cat_Catalogo#wsdl.interface(Cat_CatalogoPortType)"/>
+         </reference>
+      </componentType>
+      <property name="bpel.config.transaction" type="xs:string" many="false">required</property>
+   </component>
+   <reference name="DP_PlanCiudad-Incluidos" ui:wsdlLocation="WSDLs/DP_PlanCiudad-Incluidos.wsdl">
+      <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/DP_PlanCiudad_Incluidos#wsdl.interface(DP_PlanCiudad-IncluidosPortType)"/>
+      <binding.jca config="Adapters/DP_PlanCiudad-Incluidos_salesforce.jca"/>
+      <property name="jca.retry.count" type="xs:integer" many="false" override="may">4</property>
+      <property name="jca.retry.interval" type="xs:integer" many="false" override="may">1</property>
+      <property name="jca.retry.backoff" type="xs:integer" many="false" override="may">2</property>
+      <property name="jca.retry.maxInterval" type="xs:integer" many="false" override="may">120</property>
+   </reference>
+   <reference name="DP_ProductoCaracterstica" ui:wsdlLocation="WSDLs/DP_ProductoCaracterstica.wsdl">
+      <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/DP_ProductoCaracterstica#wsdl.interface(DP_ProductoCaractersticaPortType)"/>
+      <binding.jca config="Adapters/DP_ProductoCaracterstica_salesforce.jca"/>
+      <property name="jca.retry.count" type="xs:integer" many="false" override="may">4</property>
+      <property name="jca.retry.interval" type="xs:integer" many="false" override="may">1</property>
+      <property name="jca.retry.backoff" type="xs:integer" many="false" override="may">2</property>
+      <property name="jca.retry.maxInterval" type="xs:integer" many="false" override="may">120</property>
+   </reference>
+   <reference name="DP_PromocionPlan-Parrilla" ui:wsdlLocation="WSDLs/DP_PromocionPlan-Parrilla.wsdl">
+      <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/DP_PromocionPlan_Parrilla#wsdl.interface(DP_PromocionPlan-ParrillaPortType)"/>
+      <binding.jca config="Adapters/DP_PromocionPlan-Parrilla_salesforce.jca"/>
+      <property name="jca.retry.count" type="xs:integer" many="false" override="may">4</property>
+      <property name="jca.retry.interval" type="xs:integer" many="false" override="may">1</property>
+      <property name="jca.retry.backoff" type="xs:integer" many="false" override="may">2</property>
+      <property name="jca.retry.maxInterval" type="xs:integer" many="false" override="may">120</property>
+   </reference>
+   <reference name="DP_PromocionServicioProducto" ui:wsdlLocation="WSDLs/DP_PromocionServicioProducto.wsdl">
+      <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/DP_PromocionServicioProducto#wsdl.interface(DP_PromocionServicioProductoPortType)"/>
+      <binding.jca config="Adapters/DP_PromocionServicioProducto_salesforce.jca"/>
+      <property name="jca.retry.count" type="xs:integer" many="false" override="may">4</property>
+      <property name="jca.retry.interval" type="xs:integer" many="false" override="may">1</property>
+      <property name="jca.retry.backoff" type="xs:integer" many="false" override="may">2</property>
+      <property name="jca.retry.maxInterval" type="xs:integer" many="false" override="may">120</property>
+   </reference>
+   <reference name="DP_ServicioProducto-Adicional" ui:wsdlLocation="WSDLs/DP_ServicioProducto-Adicional.wsdl">
+      <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/DP_ServicioProducto_Adicional#wsdl.interface(DP_ServicioProducto-AdicionalPortType)"/>
+      <binding.jca config="Adapters/DP_ServicioProducto-Adicional_salesforce.jca"/>
+      <property name="jca.retry.count" type="xs:integer" many="false" override="may">4</property>
+      <property name="jca.retry.interval" type="xs:integer" many="false" override="may">1</property>
+      <property name="jca.retry.backoff" type="xs:integer" many="false" override="may">2</property>
+      <property name="jca.retry.maxInterval" type="xs:integer" many="false" override="may">120</property>
+   </reference>
+   <reference name="Cat_Catalogo" ui:wsdlLocation="WSDLs/Cat_Catalogo.wsdl">
+      <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/Cat_Catalogo#wsdl.interface(Cat_CatalogoPortType)"/>
+      <binding.jca config="Adapters/Cat_Catalogo_salesforce.jca"/>
+      <property name="jca.retry.count" type="xs:integer" many="false" override="may">4</property>
+      <property name="jca.retry.interval" type="xs:integer" many="false" override="may">1</property>
+      <property name="jca.retry.backoff" type="xs:integer" many="false" override="may">2</property>
+      <property name="jca.retry.maxInterval" type="xs:integer" many="false" override="may">120</property>
+   </reference>
+   <wire>
+      <source.uri>consultacanales_client_ep</source.uri>
+      <target.uri>ConsultaCanales/consultacanales_client</target.uri>
+   </wire>
+   <wire>
+      <source.uri>ConsultaCanales/DP_PlanCiudad-Incluidos</source.uri>
+      <target.uri>DP_PlanCiudad-Incluidos</target.uri>
+   </wire>
+   <wire>
+      <source.uri>ConsultaCanales/DP_ProductoCaracterstica</source.uri>
+      <target.uri>DP_ProductoCaracterstica</target.uri>
+   </wire>
+   <wire>
+      <source.uri>ConsultaCanales/DP_PromocionPlan-Parrilla</source.uri>
+      <target.uri>DP_PromocionPlan-Parrilla</target.uri>
+   </wire>
+   <wire>
+      <source.uri>ConsultaCanales/DP_PromocionServicioProducto</source.uri>
+      <target.uri>DP_PromocionServicioProducto</target.uri>
+   </wire>
+   <wire>
+      <source.uri>ConsultaCanales/DP_ServicioProducto-Adicional</source.uri>
+      <target.uri>DP_ServicioProducto-Adicional</target.uri>
+   </wire>
+   <wire>
+      <source.uri>ConsultaCanales/Cat_Catalogo</source.uri>
+      <target.uri>Cat_Catalogo</target.uri>
+   </wire>
+</composite>

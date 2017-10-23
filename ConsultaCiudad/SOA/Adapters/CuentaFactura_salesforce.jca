@@ -1,0 +1,20 @@
+<adapter-config name="CuentaFacturaPortType" adapter="salesforce" wsdlLocation="../WSDLs/CuentaFactura.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  <connection-factory location="cloud/CloudAdapter">
+    <non-managed-connection managedConnectionFactoryClassName="oracle.cloud.connector.salesforce.SalesforceConnectionFactory">
+      <property name="targetWSDLURL" value="../WSDLs/enterpriseQA8.0.wsdl"/>
+      <property name="csfkey" value="keySalesforceQA"/>
+      <property name="csfMap" value="SOA"/>
+      <property name="applicationVersion" value="38.0"/>
+    </non-managed-connection>
+  </connection-factory>
+  <endpoint-interaction portType="CuentaFacturaPortType" operation="query">
+    <interaction-spec className="oracle.tip.adapter.cloud.CloudInteractionSpec">
+      <property name="targetOperation" value="query"/>
+      <property name="operationPath" value=""/>
+      <property name="oracle.cloud.rt.sfdcAdapterNamespace" value="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCiudad/CuentaFactura#new"/>
+      <property name="selectedObjects" value="CuentaFactura__c,QueryParameters"/>
+      <property name="oracle.cloud.rt.queryString" value="SELECT Id,IdCuentaBRM__c,IdCuenta__c,Plaza__c,Fecha_activacion__c FROM CuentaFactura__c WHERE  Fecha_activacion__c != null AND IdCuentaBRM__c = '&amp;IdCuentaBRM__c'"/>
+      <property name="oracle.cloud.rt.suppressResponse" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+</adapter-config>

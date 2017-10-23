@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<adapter-config name="DP_PromocionPlan-ParrillaPortType" adapter="salesforce" wsdlLocation="../WSDLs/DP_PromocionPlan-Parrilla.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+   <connection-factory location="cloud/CloudAdapter">
+      <non-managed-connection managedConnectionFactoryClassName="oracle.cloud.connector.salesforce.SalesforceConnectionFactory">
+         <property name="targetWSDLURL" value="../WSDLs/enterpriseProd3.0.wsdl"/>
+         <property name="csfkey" value="keySalesforceProd"/>
+         <property name="csfMap" value="SOA"/>
+         <property name="applicationVersion" value="38.0"/>
+      </non-managed-connection>
+   </connection-factory>
+   <endpoint-interaction portType="DP_PromocionPlan-ParrillaPortType" operation="query">
+      <interaction-spec className="oracle.tip.adapter.cloud.CloudInteractionSpec">
+         <property name="targetOperation" value="query"/>
+         <property name="operationPath" value=""/>
+         <property name="oracle.cloud.rt.sfdcAdapterNamespace" value="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/DP_PromocionPlan_Parrilla#new"/>
+         <property name="selectedObjects" value="DP_PromocionPlan__c,QueryParameters"/>
+         <property name="oracle.cloud.rt.queryString" value="SELECT Id,   DP_Plan_CambioParrilla__c,   Estatus__c,   DP_Plan__c,   DP_Plan__r.IdPlanBRM__c,   DP_Plan__r.Estatus__c,   DP_Promocion__r.Id,   DP_Promocion__r.IdPromocion__c,   DP_Promocion__r.Estatus__c FROM DP_PromocionPlan__c WHERE   DP_Plan__r.IdPlanBRM__c = '&amp;IdPlanBRM__c' AND DP_Promocion__r.IdPromocion__c = '&amp;IdPromocion__c'"/>
+         <property name="oracle.cloud.rt.suppressResponse" value="false"/>
+      </interaction-spec>
+   </endpoint-interaction>
+</adapter-config>

@@ -1,0 +1,202 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Oct 06 05:44:09 CDT 2016
+  Author:  agarcia
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ConsultaCiudad"
+               targetNamespace="http://xmlns.oracle.com/SalesforceDesa/ConsultaCiudad/ConsultaCiudad"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/SalesforceDesa/ConsultaCiudad/ConsultaCiudad"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCiudad/CuentaFactura"
+         xmlns:ns2="http://xml.oracle.com/types/CuentaFactura"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions" xmlns:ess="http://xmlns.oracle.com/scheduler"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns3="http://xmlns.oracle.com/SeguridadBRM/LoginUserApp/BPELLoginUserApp">
+
+    <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/SalesforceDesa/ConsultaCiudad/ConsultaCiudad" location="../WSDLs/ConsultaCiudad.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="consultaciudad_client" partnerLinkType="client:ConsultaCiudad" myRole="ConsultaCiudadProvider"/>
+    <partnerLink name="CuentaFactura" partnerLinkType="ns1:query_plt" partnerRole="query_role"/>
+    <partnerLink name="LoginUserApp" partnerLinkType="ns3:BPELLoginUserApp" partnerRole="BPELLoginUserAppProvider"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:ConsultaCiudadRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:ConsultaCiudadResponseMessage"/>
+    <variable name="Ivk_CuentaFactura_InputVariable" messageType="ns1:queryRequestMessage"/>
+    <variable name="Ivk_CuentaFactura_OutputVariable" messageType="ns1:queryResponseMessage"/>
+    <variable name="Ivk_Login_InputVariable" messageType="ns3:BPELLoginUserAppRequestMessage"/>
+    <variable name="Ivk_Login_OutputVariable" messageType="ns3:BPELLoginUserAppResponseMessage"/>
+  </variables>
+  <faultHandlers>
+    <catchAll>
+      <sequence name="Sequence1">
+        <assign name="AssGeneralError">
+          <copy>
+            <from>'1'</from>
+            <to>$outputVariable.payload/client:Result/client:Result</to>
+          </copy>
+          <copy>
+            <from>'1'</from>
+            <to>$outputVariable.payload/client:Result/client:IdResult</to>
+          </copy>
+          <copy>
+            <from>'General error'</from>
+            <to>$outputVariable.payload/client:Result/client:Description</to>
+          </copy>
+        </assign>
+        <reply name="Reply1" variable="outputVariable" partnerLink="consultaciudad_client"
+               portType="client:ConsultaCiudad" operation="process"/>
+        <exit name="Exit1"/>
+      </sequence>
+    </catchAll>
+  </faultHandlers>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in ConsultaCiudad.wsdl) -->
+    <receive name="receiveInput" partnerLink="consultaciudad_client" portType="client:ConsultaCiudad" operation="process" variable="inputVariable" createInstance="yes"/>
+    <assign name="AssLogin">
+      <copy>
+        <from>$inputVariable.payload/client:Login/client:User</from>
+        <to>$Ivk_Login_InputVariable.payload/ns3:userId</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:Login/client:Password</from>
+        <to>$Ivk_Login_InputVariable.payload/ns3:password</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:Login/client:Ip</from>
+        <to>$Ivk_Login_InputVariable.payload/ns3:ip</to>
+      </copy>
+    </assign>
+    <invoke name="IvkLogin" bpelx:invokeAsDetail="no" partnerLink="LoginUserApp" portType="ns3:BPELLoginUserApp"
+            operation="process" inputVariable="Ivk_Login_InputVariable" outputVariable="Ivk_Login_OutputVariable"/>
+    <if name="If-Login">
+      <documentation>
+        <![CDATA[0]]>
+      </documentation>
+      <condition>string($Ivk_Login_OutputVariable.payload/ns3:IdResult )= '0'</condition>
+      <sequence>
+        <assign name="AssInputCuentaFac">
+          <copy>
+            <from>$inputVariable.payload/client:IdCuentaBRM</from>
+            <to>$Ivk_CuentaFactura_InputVariable.parameters/ns1:QueryParameters/ns2:IdCuentaBRM__c</to>
+          </copy>
+        </assign>
+        <invoke name="IvkCuentaFactura" bpelx:invokeAsDetail="no" partnerLink="CuentaFactura"
+                portType="ns1:CuentaFacturaPortType" operation="query" inputVariable="Ivk_CuentaFactura_InputVariable"
+                outputVariable="Ivk_CuentaFactura_OutputVariable"/>
+        <if name="If-Success">
+          <documentation>
+            <![CDATA[true]]>
+          </documentation>
+          <condition>count($Ivk_CuentaFactura_OutputVariable.parameters/ns1:QueryResults/ns1:records)&gt;0</condition>
+          <assign name="AssOutput">
+            <copy>
+              <from>'0'</from>
+              <to>$outputVariable.payload/client:Result/client:Result</to>
+            </copy>
+            <copy>
+              <from>'0'</from>
+              <to>$outputVariable.payload/client:Result/client:IdResult</to>
+            </copy>
+            <copy>
+              <from>'Success operation'</from>
+              <to>$outputVariable.payload/client:Result/client:Description</to>
+            </copy>
+            <copy>
+              <from>$Ivk_CuentaFactura_OutputVariable.parameters/ns1:QueryResults/ns1:records/ns1:Plaza__c</from>
+              <to>$outputVariable.payload/client:Ciudad</to>
+            </copy>
+          </assign>
+          <else>
+            <documentation>
+              <![CDATA[false]]>
+            </documentation>
+            <assign name="AssOutput">
+              <copy>
+                <from>'1'</from>
+                <to>$outputVariable.payload/client:Result/client:Result</to>
+              </copy>
+              <copy>
+                <from>'1'</from>
+                <to>$outputVariable.payload/client:Result/client:IdResult</to>
+              </copy>
+              <copy>
+                <from>'No se encontraron resultados'</from>
+                <to>$outputVariable.payload/client:Result/client:Description</to>
+              </copy>
+            </assign>
+          </else>
+        </if>
+      </sequence>
+      <else>
+        <documentation>
+          <![CDATA[1]]>
+        </documentation>
+        <assign name="AssFaliedLogin">
+          <copy>
+            <from>'1'</from>
+            <to>$outputVariable.payload/client:Result/client:Result</to>
+          </copy>
+          <copy>
+            <from>'1'</from>
+            <to>$outputVariable.payload/client:Result/client:IdResult</to>
+          </copy>
+          <copy>
+            <from>$Ivk_Login_OutputVariable.payload/ns3:ResultDescription</from>
+            <to>$outputVariable.payload/client:Ciudad</to>
+          </copy>
+        </assign>
+      </else>
+    </if>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="consultaciudad_client" portType="client:ConsultaCiudad" operation="process" variable="outputVariable"/>
+  </sequence>
+</process>

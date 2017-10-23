@@ -1,0 +1,253 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Sep 29 22:05:09 CDT 2016
+  Author:  algarciaa
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ConsultaMegasCanales"
+               targetNamespace="http://xmlns.oracle.com/VentasMovil/ConsultaMegasCanales/ConsultaMegasCanales"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/VentasMovil/ConsultaMegasCanales/ConsultaMegasCanales"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegasCanales/DP_Plan"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegasCanales/DP_PlanServicio"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegasCanales/DP_ServicioProducto"
+         xmlns:ns4="http://xml.oracle.com/types/DP_Plan" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns5="urn:sobject.enterprise.soap.sforce.com" xmlns:ns6="http://xml.oracle.com/types/DP_PlanServicio"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions" xmlns:ess="http://xmlns.oracle.com/scheduler"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns7="http://xml.oracle.com/types/DP_ServicioProducto"
+         xmlns:ns8="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegasCanales/DP_PromocionPlan"
+         xmlns:ns9="http://xml.oracle.com/types/DP_PromocionPlan"
+         xmlns:ns10="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegasCanales/DP_PlanCiudad"
+         xmlns:ns11="http://xml.oracle.com/types/DP_PlanCiudad"
+         xmlns:ns12="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegasCanales/DP_PromocionServicioProducto_Television"
+         xmlns:ns13="http://xml.oracle.com/types/DP_PromocionServicioProducto_Television"
+         xmlns:ns14="http://xmlns.oracle.com/SalesforceDesa/ConsultaMegas/ConsultaMegas"
+         xmlns:ns15="http://xmlns.oracle.com/SalesforceDesa/ConsultaCanales/ConsultaCanales">
+
+    <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/VentasMovil/ConsultaMegasCanales/ConsultaMegasCanales" location="../WSDLs/ConsultaMegasCanales.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="consultamegascanales_client" partnerLinkType="client:ConsultaMegasCanales" myRole="ConsultaMegasCanalesProvider"/>
+    <partnerLink name="ConsultaMegas" partnerLinkType="ns14:ConsultaMegas" partnerRole="ConsultaMegasProvider"/>
+    <partnerLink name="ConsultaCanales" partnerLinkType="ns15:ConsultaCanales" partnerRole="ConsultaCanalesProvider"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:ConsultaMegasCanalesRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:ConsultaMegasCanalesResponseMessage"/>
+    <variable name="Ivk_ConsultaMegas_InputVariable" messageType="ns14:ConsultaMegasRequestMessage"/>
+    <variable name="Ivk_ConsultaMegas_OutputVariable" messageType="ns14:ConsultaMegasResponseMessage"/>
+    <variable name="Ivk_ConsultaCanales_InputVariable" messageType="ns15:ConsultaCanalesRequestMessage"/>
+    <variable name="Ivk_ConsultaCanales_OutputVariable" messageType="ns15:ConsultaCanalesResponseMessage"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in ConsultaMegasCanales.wsdl) -->
+    <receive name="receiveInput" partnerLink="consultamegascanales_client" portType="client:ConsultaMegasCanales" operation="process" variable="inputVariable" createInstance="yes"/>
+    <if name="If-Servicio">
+      <documentation>
+        <![CDATA[Internet TP]]>
+      </documentation>
+      <condition>$inputVariable.payload/client:Info/client:Servicio = 'Internet TP'</condition>
+      <sequence>
+        <assign name="AssInputCMegas">
+          <copy>
+            <from>$inputVariable.payload/client:Login/client:User</from>
+            <to>$Ivk_ConsultaMegas_InputVariable.payload/ns14:Login/ns14:User</to>
+          </copy>
+          <copy>
+            <from>$inputVariable.payload/client:Login/client:Password</from>
+            <to>$Ivk_ConsultaMegas_InputVariable.payload/ns14:Login/ns14:Password</to>
+          </copy>
+          <copy>
+            <from>$inputVariable.payload/client:Login/client:Ip</from>
+            <to>$Ivk_ConsultaMegas_InputVariable.payload/ns14:Login/ns14:Ip</to>
+          </copy>
+          <copy>
+            <from>string($inputVariable.payload/client:Info/client:IdPromocion)</from>
+            <to>$Ivk_ConsultaMegas_InputVariable.payload/ns14:Info/ns14:IdPromocion</to>
+          </copy>
+          <copy>
+            <from>$inputVariable.payload/client:Info/client:IdBRM</from>
+            <to>$Ivk_ConsultaMegas_InputVariable.payload/ns14:Info/ns14:IdBRM</to>
+          </copy>
+          <copy>
+            <from>$inputVariable.payload/client:Info/client:Servicio</from>
+            <to>$Ivk_ConsultaMegas_InputVariable.payload/ns14:Info/ns14:Servicio</to>
+          </copy>
+          <copy>
+            <from>$inputVariable.payload/client:Info/client:TipoProducto</from>
+            <to>$Ivk_ConsultaMegas_InputVariable.payload/ns14:Info/ns14:TipoProducto</to>
+          </copy>
+          <copy>
+            <from>$inputVariable.payload/client:Info/client:Poid</from>
+            <to>$Ivk_ConsultaMegas_InputVariable.payload/ns14:Info/ns14:Poid</to>
+          </copy>
+        </assign>
+        <invoke name="IvkConsultaMegas" bpelx:invokeAsDetail="no" partnerLink="ConsultaMegas"
+                portType="ns14:ConsultaMegas" operation="process" inputVariable="Ivk_ConsultaMegas_InputVariable"
+                outputVariable="Ivk_ConsultaMegas_OutputVariable"/>
+        <assign name="Output">
+          <copy>
+            <from>substring-before(string($Ivk_ConsultaMegas_OutputVariable.payload/ns14:IP/ns14:MegasSubida),'.')</from>
+            <to>$outputVariable.payload/client:IP/client:MegasSubida</to>
+          </copy>
+          <copy>
+            <from>$Ivk_ConsultaMegas_OutputVariable.payload/ns14:Result/ns14:Result</from>
+            <to>$outputVariable.payload/client:Result/client:Result</to>
+          </copy>
+          <copy>
+            <from>$Ivk_ConsultaMegas_OutputVariable.payload/ns14:Result/ns14:IdResult</from>
+            <to>$outputVariable.payload/client:Result/client:IdResult</to>
+          </copy>
+          <copy>
+            <from>$Ivk_ConsultaMegas_OutputVariable.payload/ns14:Result/ns14:Description</from>
+            <to>$outputVariable.payload/client:Result/client:Description</to>
+          </copy>
+          <copy>
+            <from>substring-before(string($Ivk_ConsultaMegas_OutputVariable.payload/ns14:IP/ns14:MegasBajada),'.')</from>
+            <to>$outputVariable.payload/client:IP/client:MegasBajada</to>
+          </copy>
+        </assign>
+      </sequence>
+      <elseif>
+        <documentation>
+          <![CDATA[Television TP]]>
+        </documentation>
+        <condition>$inputVariable.payload/client:Info/client:Servicio = 'Television TP'</condition>
+        <sequence name="Sequence1">
+          <assign name="AssInputCCanales">
+            <copy>
+              <from>$inputVariable.payload/client:Login/client:User</from>
+              <to>$Ivk_ConsultaCanales_InputVariable.payload/ns15:Login/ns15:User</to>
+            </copy>
+            <copy>
+              <from>$inputVariable.payload/client:Login/client:Password</from>
+              <to>$Ivk_ConsultaCanales_InputVariable.payload/ns15:Login/ns15:Password</to>
+            </copy>
+            <copy>
+              <from>$inputVariable.payload/client:Login/client:Ip</from>
+              <to>$Ivk_ConsultaCanales_InputVariable.payload/ns15:Login/ns15:Ip</to>
+            </copy>
+            <copy>
+              <from>string($inputVariable.payload/client:Info/client:IdPromocion)</from>
+              <to>$Ivk_ConsultaCanales_InputVariable.payload/ns15:Info/ns15:IdPromocion</to>
+            </copy>
+            <copy>
+              <from>$inputVariable.payload/client:Info/client:IdBRM</from>
+              <to>$Ivk_ConsultaCanales_InputVariable.payload/ns15:Info/ns15:IdBRM</to>
+            </copy>
+            <copy>
+              <from>$inputVariable.payload/client:Info/client:Servicio</from>
+              <to>$Ivk_ConsultaCanales_InputVariable.payload/ns15:Info/ns15:Servicio</to>
+            </copy>
+            <copy>
+              <from>$inputVariable.payload/client:Info/client:TipoProducto</from>
+              <to>$Ivk_ConsultaCanales_InputVariable.payload/ns15:Info/ns15:TipoProducto</to>
+            </copy>
+            <copy>
+              <from>$inputVariable.payload/client:Info/client:Poid</from>
+              <to>$Ivk_ConsultaCanales_InputVariable.payload/ns15:Info/ns15:Poid</to>
+            </copy>
+            <copy>
+              <from>string($inputVariable.payload/client:Info/client:Ciudad)</from>
+              <to>$Ivk_ConsultaCanales_InputVariable.payload/ns15:Info/ns15:Ciudad</to>
+            </copy>
+          </assign>
+          <invoke name="IvkConsultaCanales" bpelx:invokeAsDetail="no" partnerLink="ConsultaCanales"
+                  portType="ns15:ConsultaCanales" operation="process"
+                  inputVariable="Ivk_ConsultaCanales_InputVariable"
+                  outputVariable="Ivk_ConsultaCanales_OutputVariable"/>
+          <assign name="Output">
+            <copy>
+              <from>string($Ivk_ConsultaCanales_OutputVariable.payload/ns15:IPTV/ns15:TmCode)</from>
+              <to>$outputVariable.payload/client:IPTV/client:TmCode</to>
+            </copy>
+            <copy>
+              <from>$Ivk_ConsultaCanales_OutputVariable.payload/ns15:Result/ns15:Result</from>
+              <to>$outputVariable.payload/client:Result/client:Result</to>
+            </copy>
+            <copy>
+              <from>$Ivk_ConsultaCanales_OutputVariable.payload/ns15:Result/ns15:IdResult</from>
+              <to>$outputVariable.payload/client:Result/client:IdResult</to>
+            </copy>
+            <copy>
+              <from>$Ivk_ConsultaCanales_OutputVariable.payload/ns15:Result/ns15:Description</from>
+              <to>$outputVariable.payload/client:Result/client:Description</to>
+            </copy>
+            <copy>
+              <from>string($Ivk_ConsultaCanales_OutputVariable.payload/ns15:IPTV/ns15:Esparrilla)</from>
+              <to>$outputVariable.payload/client:IPTV/client:Esparrilla</to>
+            </copy>
+          </assign>
+        </sequence>
+      </elseif>
+      <else>
+        <documentation>
+          <![CDATA[Otro]]>
+        </documentation>
+        <assign name="AssgFailedServicio">
+          <copy>
+            <from>'2'</from>
+            <to>$outputVariable.payload/client:Result/client:Result</to>
+          </copy>
+          <copy>
+            <from>'2'</from>
+            <to>$outputVariable.payload/client:Result/client:IdResult</to>
+          </copy>
+          <copy>
+            <from>'Servicio no encontrado'</from>
+            <to>$outputVariable.payload/client:Result/client:Description</to>
+          </copy>
+        </assign>
+      </else>
+    </if>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="consultamegascanales_client" portType="client:ConsultaMegasCanales" operation="process" variable="outputVariable"/>
+  </sequence>
+</process>

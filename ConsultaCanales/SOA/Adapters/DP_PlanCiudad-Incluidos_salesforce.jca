@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<adapter-config name="DP_PlanCiudad-IncluidosPortType" adapter="salesforce" wsdlLocation="../WSDLs/DP_PlanCiudad-Incluidos.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+   <connection-factory location="cloud/CloudAdapter">
+      <non-managed-connection managedConnectionFactoryClassName="oracle.cloud.connector.salesforce.SalesforceConnectionFactory">
+         <property name="targetWSDLURL" value="../WSDLs/enterpriseProd3.0.wsdl"/>
+         <property name="csfkey" value="keySalesforceProd"/>
+         <property name="csfMap" value="SOA"/>
+         <property name="applicationVersion" value="38.0"/>
+      </non-managed-connection>
+   </connection-factory>
+   <endpoint-interaction portType="DP_PlanCiudad-IncluidosPortType" operation="query">
+      <interaction-spec className="oracle.tip.adapter.cloud.CloudInteractionSpec">
+         <property name="targetOperation" value="query"/>
+         <property name="operationPath" value=""/>
+         <property name="oracle.cloud.rt.sfdcAdapterNamespace" value="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/DP_PlanCiudad_Incluidos#new"/>
+         <property name="selectedObjects" value="DP_PlanCiudad__c,QueryParameters"/>
+         <property name="oracle.cloud.rt.queryString" value="SELECT Id,   IdPlanParrilla__c,   Estatus__c,   Ciudad__c,   PlanId__c,   PlanId__r.IdPlanBRM__c,   PlanId__r.Estatus__c FROM DP_PlanCiudad__c WHERE  PlanId__r.IdPlanBRM__c = '&amp;IdPlanBRM__c' AND PlanId__r.FamiliaId__r.Tipo__c = 'Residencial' AND Ciudad__c = '&amp;Ciudad__c'"/>
+         <property name="oracle.cloud.rt.suppressResponse" value="false"/>
+      </interaction-spec>
+   </endpoint-interaction>
+</adapter-config>

@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions name="ConsultaCanales" targetNamespace="http://xmlns.oracle.com/SalesforceDesa/ConsultaCanales/ConsultaCanales" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:client="http://xmlns.oracle.com/SalesforceDesa/ConsultaCanales/ConsultaCanales" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype">
+   <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <import namespace="http://xmlns.oracle.com/SalesforceDesa/ConsultaCanales/ConsultaCanales" schemaLocation="../Schemas/ConsultaCanales.xsd"/>
+      </schema>
+   </wsdl:types>
+   <wsdl:message name="ConsultaCanalesRequestMessage">
+      <wsdl:part name="payload" element="client:process"/>
+   </wsdl:message>
+   <wsdl:message name="ConsultaCanalesResponseMessage">
+      <wsdl:part name="payload" element="client:processResponse"/>
+   </wsdl:message>
+   <wsdl:portType name="ConsultaCanales">
+      <wsdl:operation name="process">
+         <wsdl:input message="client:ConsultaCanalesRequestMessage"/>
+         <wsdl:output message="client:ConsultaCanalesResponseMessage"/>
+      </wsdl:operation>
+   </wsdl:portType>
+   <plnk:partnerLinkType name="ConsultaCanales">
+      <plnk:role name="ConsultaCanalesProvider" portType="client:ConsultaCanales"/>
+   </plnk:partnerLinkType>
+</wsdl:definitions>

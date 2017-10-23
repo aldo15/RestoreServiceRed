@@ -1,0 +1,443 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Sat Oct 01 20:24:09 CDT 2016
+  Author:  agarcia
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ConsultaMegas"
+               targetNamespace="http://xmlns.oracle.com/SalesforceDesa/ConsultaMegas/ConsultaMegas"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/SalesforceDesa/ConsultaMegas/ConsultaMegas"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions" xmlns:ess="http://xmlns.oracle.com/scheduler"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegas/DP_ServicioProducto_IncluidosAdicionales"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegas/DP_PlanServicio"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegas/DP_Plan"
+         xmlns:ns4="http://xml.oracle.com/types/DP_Plan" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns5="http://xml.oracle.com/types/DP_PlanServicio" xmlns:ns6="urn:sobject.enterprise.soap.sforce.com"
+         xmlns:ns7="http://xml.oracle.com/types/DP_ServicioProducto_IncluidosAdicionales"
+         xmlns:ns8="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegas/DP_PromocionPlan"
+         xmlns:ns9="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegas/DP_PromocionServicioProducto"
+         xmlns:ns10="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegas/DP_ProductoCaracteristica"
+         xmlns:ns11="http://xml.oracle.com/types/DP_PromocionPlan"
+         xmlns:ns12="http://xml.oracle.com/types/DP_PromocionServicioProducto"
+         xmlns:ns13="http://xml.oracle.com/types/DP_ProductoCaracteristica"
+         xmlns:ns14="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegas/DP_ServicioProducto_Promocion"
+         xmlns:ns15="http://xml.oracle.com/types/DP_ServicioProducto-Promocion"
+         xmlns:ns16="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegas/DP_PromocionPlan__c">
+
+    <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/SalesforceDesa/ConsultaMegas/ConsultaMegas" location="../WSDLs/ConsultaMegas.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="consultamegas_client" partnerLinkType="client:ConsultaMegas" myRole="ConsultaMegasProvider"/>
+    <partnerLink name="DP_Plan" partnerLinkType="ns3:query_plt" partnerRole="query_role"/>
+    <partnerLink name="DP_PlanServicio" partnerLinkType="ns2:query_plt" partnerRole="query_role"/>
+    <partnerLink name="DP_ProductoCaracteristica" partnerLinkType="ns10:query_plt" partnerRole="query_role"/>
+    <partnerLink name="DP_PromocionPlan" partnerLinkType="ns8:query_plt" partnerRole="query_role"/>
+    <partnerLink name="DP_PromocionServicioProducto" partnerLinkType="ns9:query_plt" partnerRole="query_role"/>
+    <partnerLink name="DP_ServicioProducto_IncluidosAdicionales" partnerLinkType="ns1:query_plt"
+                 partnerRole="query_role"/>
+    <partnerLink name="DP_ServicioProducto-Promocion" partnerLinkType="ns14:query_plt" partnerRole="query_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:ConsultaMegasRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:ConsultaMegasResponseMessage"/>
+    <variable name="Ivk_DPPlan_InputVariable" messageType="ns3:queryRequestMessage"/>
+    <variable name="Ivk_DPPlan_OutputVariable" messageType="ns3:queryResponseMessage"/>
+    <variable name="Ivk_DPPlanServicio_InputVariable" messageType="ns2:queryRequestMessage"/>
+    <variable name="Ivk_DPPlanServicio_OutputVariable" messageType="ns2:queryResponseMessage"/>
+    <variable name="Ivk_DPServProd-IncluidosAdicionales_InputVariable" messageType="ns1:queryRequestMessage"/>
+    <variable name="Ivk_DPServProd-IncluidosAdicionales_OutputVariable" messageType="ns1:queryResponseMessage"/>
+    <variable name="Ivk_DPPromoPlan_InputVariable" messageType="ns8:queryRequestMessage"/>
+    <variable name="Ivk_DPPromoPlan_OutputVariable" messageType="ns8:queryResponseMessage"/>
+    <variable name="Ivk_DPPromoServProducto_InputVariable" messageType="ns9:queryRequestMessage"/>
+    <variable name="Ivk_DPPromoServProducto_OutputVariable" messageType="ns9:queryResponseMessage"/>
+    <variable name="Ivk_DPProductoCaract_InputVariable" messageType="ns10:queryRequestMessage"/>
+    <variable name="Ivk_DPProductoCaract_OutputVariable" messageType="ns10:queryResponseMessage"/>
+    <variable name="Ivk_DPServProd-Promo_InputVariable" messageType="ns14:queryRequestMessage"/>
+    <variable name="Ivk_DPServProd-Promo_OutputVariable" messageType="ns14:queryResponseMessage"/>
+  </variables>
+  <faultHandlers>
+    <catchAll>
+      <sequence name="Sequence6">
+        <assign name="AssGeneralError">
+          <copy>
+            <from>'1'</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:Result/client:Result</to>
+          </copy>
+          <copy>
+            <from>'1'</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:Result/client:IdResult</to>
+          </copy>
+          <copy>
+            <from>'General error'</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:Result/client:Description</to>
+          </copy>
+        </assign>
+        <reply name="Reply1" partnerLink="consultamegas_client" variable="outputVariable"
+               portType="client:ConsultaMegas" operation="process"/>
+        <exit name="Exit1"/>
+      </sequence>
+    </catchAll>
+  </faultHandlers>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in ConsultaMegas.wsdl) -->
+    <receive name="receiveInput" partnerLink="consultamegas_client" portType="client:ConsultaMegas" operation="process" variable="inputVariable" createInstance="yes"/>
+    <if name="If-TipoPtoducto">
+      <documentation>
+        <![CDATA[Incluido&Adicional]]>
+      </documentation>
+      <condition>($inputVariable.payload/client:Info/client:TipoProducto = 'Producto incluido') or ($inputVariable.payload/client:Info/client:TipoProducto = 'Producto adicional')</condition>
+      <sequence name="Sequence1">
+        <assign name="AssgInputDPPlan">
+          <copy>
+            <from>$inputVariable.payload/client:Info/client:IdBRM</from>
+            <to>$Ivk_DPPlan_InputVariable.parameters/ns3:QueryParameters/ns4:IdPlanBRM__c</to>
+          </copy>
+        </assign>
+        <invoke name="IvkDPPlan" bpelx:invokeAsDetail="no" partnerLink="DP_Plan" portType="ns3:DP_PlanPortType"
+                operation="query" inputVariable="Ivk_DPPlan_InputVariable" outputVariable="Ivk_DPPlan_OutputVariable"/>
+        <assign name="AssgInputDPPlanServicio">
+          <copy>
+            <from>string($Ivk_DPPlan_OutputVariable.parameters/ns3:QueryResults/ns3:records/ns3:Id)</from>
+            <to>$Ivk_DPPlanServicio_InputVariable.parameters/ns2:QueryParameters/ns5:PlanId__c</to>
+          </copy>
+          <copy>
+            <from>$inputVariable.payload/client:Info/client:Servicio</from>
+            <to>$Ivk_DPPlanServicio_InputVariable.parameters/ns2:QueryParameters/ns5:TipoServicio__c</to>
+          </copy>
+        </assign>
+        <invoke name="IvkDPPlanServicio" bpelx:invokeAsDetail="no" partnerLink="DP_PlanServicio"
+                portType="ns2:DP_PlanServicioPortType" operation="query"
+                inputVariable="Ivk_DPPlanServicio_InputVariable" outputVariable="Ivk_DPPlanServicio_OutputVariable"/>
+        <assign name="AssgInputDPServicioProducto">
+          <copy>
+            <from>$inputVariable.payload/client:Info/client:Poid</from>
+            <to>$Ivk_DPServProd-IncluidosAdicionales_InputVariable.parameters/ns1:QueryParameters/ns7:IdBrmForward__c</to>
+          </copy>
+          <copy>
+            <from>$inputVariable.payload/client:Info/client:TipoProducto</from>
+            <to>$Ivk_DPServProd-IncluidosAdicionales_InputVariable.parameters/ns1:QueryParameters/ns7:TipoProducto__c</to>
+          </copy>
+          <copy>
+            <from>string($Ivk_DPPlanServicio_OutputVariable.parameters/ns2:QueryResults/ns2:records/ns2:Id)</from>
+            <to>$Ivk_DPServProd-IncluidosAdicionales_InputVariable.parameters/ns1:QueryParameters/ns7:DP_PlanServicio__c</to>
+          </copy>
+        </assign>
+        <invoke name="IvkDPServProd-IncluidosAdicionales" bpelx:invokeAsDetail="no"
+                partnerLink="DP_ServicioProducto_IncluidosAdicionales"
+                portType="ns1:DP_ServicioProducto_IncluidosAdicionalesPortType" operation="query"
+                inputVariable="Ivk_DPServProd-IncluidosAdicionales_InputVariable"
+                outputVariable="Ivk_DPServProd-IncluidosAdicionales_OutputVariable"/>
+        <if name="If-MegasSubidaBajada">
+          <documentation>
+            <![CDATA[ConMegas]]>
+          </documentation>
+          <condition>string-length(normalize-space(concat($Ivk_DPServProd-IncluidosAdicionales_OutputVariable.parameters/ns1:QueryResults/ns1:records/ns1:DP_ProductoCaracteristicaId__r/ns1:VelocidadSubida__c,''))) &gt; 0 and string-length(normalize-space(concat($Ivk_DPServProd-IncluidosAdicionales_OutputVariable.parameters/ns1:QueryResults/ns1:records/ns1:DP_ProductoCaracteristicaId__r/ns1:VelocidadBajada__c,''))) &gt; 0</condition>
+          <assign name="AssgOutput">
+            <copy>
+              <from>'0'</from>
+              <to>$outputVariable.payload/client:Result/client:Result</to>
+            </copy>
+            <copy>
+              <from>'Success operation'</from>
+              <to>$outputVariable.payload/client:Result/client:Description</to>
+            </copy>
+            <copy>
+              <from>'0'</from>
+              <to>$outputVariable.payload/client:Result/client:IdResult</to>
+            </copy>
+            <copy>
+              <from>string($Ivk_DPServProd-IncluidosAdicionales_OutputVariable.parameters/ns1:QueryResults/ns1:records/ns1:DP_ProductoCaracteristicaId__r/ns1:VelocidadSubida__c)</from>
+              <to>$outputVariable.payload/client:IP/client:MegasSubida</to>
+            </copy>
+            <copy>
+              <from>string($Ivk_DPServProd-IncluidosAdicionales_OutputVariable.parameters/ns1:QueryResults/ns1:records/ns1:DP_ProductoCaracteristicaId__r/ns1:VelocidadBajada__c)</from>
+              <to>$outputVariable.payload/client:IP/client:MegasBajada</to>
+            </copy>
+          </assign>
+          <else>
+            <documentation>
+              <![CDATA[SinMegas]]>
+            </documentation>
+            <sequence>
+              <assign name="AssgOutput">
+                <copy>
+                  <from>'1'</from>
+                  <to>$outputVariable.payload/client:Result/client:Result</to>
+                </copy>
+                <copy>
+                  <from>'1'</from>
+                  <to>$outputVariable.payload/client:Result/client:IdResult</to>
+                </copy>
+                <copy>
+                  <from>'Sin megas de subida y bajada'</from>
+                  <to>$outputVariable.payload/client:Result/client:Description</to>
+                </copy>
+              </assign>
+            </sequence>
+          </else>
+        </if>
+      </sequence>
+      <elseif>
+        <documentation>
+          <![CDATA[Promocion]]>
+        </documentation>
+        <condition>$inputVariable.payload/client:Info/client:TipoProducto = 'Promocion'</condition>
+        <sequence name="Sequence2">
+          <if name="If-IdPromocion">
+            <documentation>
+              <![CDATA[Id]]>
+            </documentation>
+            <condition>string-length($inputVariable.payload/client:Info/client:IdPromocion) &gt; 0</condition>
+            <sequence>
+              <assign name="AssInputDPPromoPlan">
+                <copy>
+                  <from>$inputVariable.payload/client:Info/client:IdBRM</from>
+                  <to>$Ivk_DPPromoPlan_InputVariable.parameters/ns8:QueryParameters/ns11:IdPlanBRM__c</to>
+                </copy>
+                <copy>
+                  <from>string($inputVariable.payload/client:Info/client:IdPromocion)</from>
+                  <to>$Ivk_DPPromoPlan_InputVariable.parameters/ns8:QueryParameters/ns11:IdPromocion__c</to>
+                </copy>
+              </assign>
+              <invoke name="IvkDPPromoPlan" partnerLink="DP_PromocionPlan"
+                      portType="ns8:DP_PromocionPlanPortType" operation="query"
+                      inputVariable="Ivk_DPPromoPlan_InputVariable" outputVariable="Ivk_DPPromoPlan_OutputVariable"
+                      bpelx:invokeAsDetail="no"/>
+              <assign name="AssInputDPPromoServProducto">
+                <copy>
+                  <from>concat(string($Ivk_DPPromoPlan_OutputVariable.parameters/ns8:QueryResults/ns8:records/ns8:Id), '')</from>
+                  <to>$Ivk_DPPromoServProducto_InputVariable.parameters/ns9:QueryParameters/ns12:DP_PromocionPlanId</to>
+                </copy>
+              </assign>
+              <invoke name="IvkDPPromoServProducto" bpelx:invokeAsDetail="no" partnerLink="DP_PromocionServicioProducto"
+                      portType="ns9:DP_PromocionServicioProductoPortType" operation="query"
+                      inputVariable="Ivk_DPPromoServProducto_InputVariable"
+                      outputVariable="Ivk_DPPromoServProducto_OutputVariable"/>
+              <if name="If-IdServicioProducto">
+                <documentation>
+                  <![CDATA[Existe]]>
+                </documentation>
+                <condition>string-length($Ivk_DPPromoServProducto_OutputVariable.parameters/ns9:QueryResults/ns9:records/ns9:DP_ServicioProducto__c) &gt; 0</condition>
+                <sequence name="Sequence5">
+                  <assign name="AssInputDPServProduct">
+                    <copy>
+                      <from>$inputVariable.payload/client:Info/client:Poid</from>
+                      <to>$Ivk_DPServProd-Promo_InputVariable.parameters/ns14:QueryParameters/ns15:IdBrmForward__c</to>
+                    </copy>
+                    <copy>
+                      <from>string($Ivk_DPPromoServProducto_OutputVariable.parameters/ns9:QueryResults/ns9:records/ns9:DP_ServicioProducto__c)</from>
+                      <to>$Ivk_DPServProd-Promo_InputVariable.parameters/ns14:QueryParameters/ns15:Id</to>
+                    </copy>
+                  </assign>
+                  <invoke name="IvkDPServProd-Promo" bpelx:invokeAsDetail="no"
+                          partnerLink="DP_ServicioProducto-Promocion"
+                          portType="ns14:DP_ServicioProducto-PromocionPortType" operation="query"
+                          inputVariable="Ivk_DPServProd-Promo_InputVariable"
+                          outputVariable="Ivk_DPServProd-Promo_OutputVariable"/>
+                  <if name="If-MegasSubidaBajada">
+                    <documentation>
+                      <![CDATA[SinMegas]]>
+                    </documentation>
+                    <condition>string-length($Ivk_DPServProd-Promo_OutputVariable.parameters/ns14:QueryResults/ns14:records/ns14:DP_ProductoCaracteristicaId__r/ns14:VelocidadSubida__c)&lt;=0 and string-length($Ivk_DPServProd-Promo_OutputVariable.parameters/ns14:QueryResults/ns14:records/ns14:DP_ProductoCaracteristicaId__r/ns14:VelocidadBajada__c)&lt;=0</condition>
+                    <assign name="AssOutput">
+                      <copy>
+                        <from>'1'</from>
+                        <to>$outputVariable.payload/client:Result/client:Result</to>
+                      </copy>
+                      <copy>
+                        <from>'1'</from>
+                        <to>$outputVariable.payload/client:Result/client:IdResult</to>
+                      </copy>
+                      <copy>
+                        <from>'Sin megas de subida y bajada'</from>
+                        <to>$outputVariable.payload/client:Result/client:Description</to>
+                      </copy>
+                    </assign>
+                    <else>
+                      <documentation>
+                        <![CDATA[ConMegas]]>
+                      </documentation>
+                      <assign name="AssOutput">
+                        <copy>
+                          <from>'0'</from>
+                          <to>$outputVariable.payload/client:Result/client:Result</to>
+                        </copy>
+                        <copy>
+                          <from>'0'</from>
+                          <to>$outputVariable.payload/client:Result/client:IdResult</to>
+                        </copy>
+                        <copy>
+                          <from>'Success operation'</from>
+                          <to>$outputVariable.payload/client:Result/client:Description</to>
+                        </copy>
+                        <copy>
+                          <from>string($Ivk_DPServProd-Promo_OutputVariable.parameters/ns14:QueryResults/ns14:records/ns14:DP_ProductoCaracteristicaId__r/ns14:VelocidadSubida__c)</from>
+                          <to>$outputVariable.payload/client:IP/client:MegasSubida</to>
+                        </copy>
+                        <copy>
+                          <from>string($Ivk_DPServProd-Promo_OutputVariable.parameters/ns14:QueryResults/ns14:records/ns14:DP_ProductoCaracteristicaId__r/ns14:VelocidadBajada__c)</from>
+                          <to>$outputVariable.payload/client:IP/client:MegasBajada</to>
+                        </copy>
+                      </assign>
+                    </else>
+                  </if>
+                </sequence>
+                <else>
+                  <documentation>
+                    <![CDATA[Vacio]]>
+                  </documentation>
+                  <sequence name="Sequence4">
+                    <assign name="AssInputDPProductoCaract">
+                      <copy>
+                        <from>string($Ivk_DPPromoServProducto_OutputVariable.parameters/ns9:QueryResults/ns9:records/ns9:DP_ProductoCaracteristica__c)</from>
+                        <to>$Ivk_DPProductoCaract_InputVariable.parameters/ns10:QueryParameters/ns13:Id</to>
+                      </copy>
+                    </assign>
+                    <invoke name="IvkDPProductoCaract" partnerLink="DP_ProductoCaracteristica"
+                            portType="ns10:DP_ProductoCaracteristicaPortType" operation="query"
+                            inputVariable="Ivk_DPProductoCaract_InputVariable"
+                            outputVariable="Ivk_DPProductoCaract_OutputVariable" bpelx:invokeAsDetail="no"/>
+                    <if name="If-MegasSubidaBajada">
+                      <documentation>
+                        <![CDATA[SinMegas]]>
+                      </documentation>
+                      <condition>string-length($Ivk_DPProductoCaract_OutputVariable.parameters/ns10:QueryResults/ns10:records/ns10:VelocidadSubida__c) &lt;=0 and string-length($Ivk_DPProductoCaract_OutputVariable.parameters/ns10:QueryResults/ns10:records/ns10:VelocidadBajada__c)&lt;=0</condition>
+                      <assign name="AssOutput">
+                        <copy>
+                          <from>'1'</from>
+                          <to>$outputVariable.payload/client:Result/client:Result</to>
+                        </copy>
+                        <copy>
+                          <from>'1'</from>
+                          <to>$outputVariable.payload/client:Result/client:IdResult</to>
+                        </copy>
+                        <copy>
+                          <from>'Sin megas de subida y bajada'</from>
+                          <to>$outputVariable.payload/client:Result/client:Description</to>
+                        </copy>
+                      </assign>
+                      <else>
+                        <documentation>
+                          <![CDATA[ConMegas]]>
+                        </documentation>
+                        <assign name="AssOutput">
+                          <copy>
+                            <from>'0'</from>
+                            <to>$outputVariable.payload/client:Result/client:Result</to>
+                          </copy>
+                          <copy>
+                            <from>'0'</from>
+                            <to>$outputVariable.payload/client:Result/client:IdResult</to>
+                          </copy>
+                          <copy>
+                            <from>'Success operation'</from>
+                            <to>$outputVariable.payload/client:Result/client:Description</to>
+                          </copy>
+                          <copy>
+                            <from>string($Ivk_DPProductoCaract_OutputVariable.parameters/ns10:QueryResults/ns10:records/ns10:VelocidadSubida__c)</from>
+                            <to>$outputVariable.payload/client:IP/client:MegasSubida</to>
+                          </copy>
+                          <copy>
+                            <from>string($Ivk_DPProductoCaract_OutputVariable.parameters/ns10:QueryResults/ns10:records/ns10:VelocidadBajada__c)</from>
+                            <to>$outputVariable.payload/client:IP/client:MegasBajada</to>
+                          </copy>
+                        </assign>
+                      </else>
+                    </if>
+                  </sequence>
+                </else>
+              </if>
+            </sequence>
+            <else>
+              <documentation>
+                <![CDATA[Vacio]]>
+              </documentation>
+              <assign name="AssFailedIdPromo">
+                <copy>
+                  <from>'1'</from>
+                  <to>$outputVariable.payload/client:Result/client:Result</to>
+                </copy>
+                <copy>
+                  <from>'1'</from>
+                  <to>$outputVariable.payload/client:Result/client:IdResult</to>
+                </copy>
+                <copy>
+                  <from>'IdPromocion no encontrado'</from>
+                  <to>$outputVariable.payload/client:Result/client:Description</to>
+                </copy>
+              </assign>
+            </else>
+          </if>
+        </sequence>
+      </elseif>
+      <else>
+        <documentation>
+          <![CDATA[Otro]]>
+        </documentation>
+        <assign name="AssgFaliedTipoProducto">
+          <copy>
+            <from>'1'</from>
+            <to>$outputVariable.payload/client:Result/client:IdResult</to>
+          </copy>
+          <copy>
+            <from>'1'</from>
+            <to>$outputVariable.payload/client:Result/client:Result</to>
+          </copy>
+          <copy>
+            <from>'TipoProducto no encontrado'</from>
+            <to>$outputVariable.payload/client:Result/client:Description</to>
+          </copy>
+        </assign>
+      </else>
+    </if>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="consultamegas_client" portType="client:ConsultaMegas" operation="process" variable="outputVariable"/>
+  </sequence>
+</process>

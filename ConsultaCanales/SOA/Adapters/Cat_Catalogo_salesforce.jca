@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<adapter-config name="Cat_CatalogoPortType" adapter="salesforce" wsdlLocation="../WSDLs/Cat_Catalogo.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+   <connection-factory location="cloud/CloudAdapter">
+      <non-managed-connection managedConnectionFactoryClassName="oracle.cloud.connector.salesforce.SalesforceConnectionFactory">
+         <property name="targetWSDLURL" value="../WSDLs/enterpriseProd3.0.wsdl"/>
+         <property name="csfkey" value="keySalesforceProd"/>
+         <property name="csfMap" value="SOA"/>
+         <property name="applicationVersion" value="38.0"/>
+      </non-managed-connection>
+   </connection-factory>
+   <endpoint-interaction portType="Cat_CatalogoPortType" operation="query">
+      <interaction-spec className="oracle.tip.adapter.cloud.CloudInteractionSpec">
+         <property name="targetOperation" value="query"/>
+         <property name="operationPath" value=""/>
+         <property name="oracle.cloud.rt.sfdcAdapterNamespace" value="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/Cat_Catalogo#new"/>
+         <property name="selectedObjects" value="Cat_Catalogo__c,QueryParameters"/>
+         <property name="oracle.cloud.rt.queryString" value="SELECT Id,Valor__c,Name FROM Cat_Catalogo__c WHERE IsDeleted = false and Tipo__c = 'Ciudad' and Valor__c = '&amp;Valor__c' "/>
+         <property name="oracle.cloud.rt.suppressResponse" value="false"/>
+      </interaction-spec>
+   </endpoint-interaction>
+</adapter-config>

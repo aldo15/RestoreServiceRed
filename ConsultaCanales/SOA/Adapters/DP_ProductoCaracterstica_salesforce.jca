@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<adapter-config name="DP_ProductoCaractersticaPortType" adapter="salesforce" wsdlLocation="../WSDLs/DP_ProductoCaracterstica.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+   <connection-factory location="cloud/CloudAdapter">
+      <non-managed-connection managedConnectionFactoryClassName="oracle.cloud.connector.salesforce.SalesforceConnectionFactory">
+         <property name="targetWSDLURL" value="../WSDLs/enterpriseProd3.0.wsdl"/>
+         <property name="csfkey" value="keySalesforceProd"/>
+         <property name="csfMap" value="SOA"/>
+         <property name="applicationVersion" value="38.0"/>
+      </non-managed-connection>
+   </connection-factory>
+   <endpoint-interaction portType="DP_ProductoCaractersticaPortType" operation="query">
+      <interaction-spec className="oracle.tip.adapter.cloud.CloudInteractionSpec">
+         <property name="targetOperation" value="query"/>
+         <property name="operationPath" value=""/>
+         <property name="oracle.cloud.rt.sfdcAdapterNamespace" value="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/DP_ProductoCaracterstica#new"/>
+         <property name="selectedObjects" value="DP_ProductoCaracteristica__c,QueryParameters"/>
+         <property name="oracle.cloud.rt.queryString" value="SELECT Id,   Name,   Estatus__c,   TMCode__c,   ProductoId__r.Id,   ProductoId__r.IdBrmForward__c FROM DP_ProductoCaracteristica__c WHERE Id = '&amp;Id' AND ProductoId__r.IdBrmForward__c = '&amp;IdBrmForward__c'"/>
+         <property name="oracle.cloud.rt.suppressResponse" value="false"/>
+      </interaction-spec>
+   </endpoint-interaction>
+</adapter-config>

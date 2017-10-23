@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+        targetNamespace="http://xmlns.oracle.com/SalesforceDesa/ConsultaMegas/ConsultaMegas"
+        xmlns="http://www.w3.org/2001/XMLSchema">
+  <element name="process">
+    <complexType>
+      <sequence>
+        <element name="Login">
+          <complexType>
+            <sequence>
+              <element name="User" type="string"/>
+              <element name="Password" type="string"/>
+              <element name="Ip" type="string"/>
+            </sequence>
+          </complexType>
+        </element>
+        <element name="Info">
+          <complexType>
+            <sequence>
+              <element name="IdPromocion" type="string" minOccurs="0"/>
+              <element name="IdBRM" type="string"/>
+              <element name="Servicio" type="string"/>
+              <element name="TipoProducto" type="string"/>
+              <element name="Poid" type="string"/>
+            </sequence>
+          </complexType>
+        </element>
+      </sequence>
+    </complexType>
+  </element>
+  <element name="processResponse">
+    <complexType>
+      <sequence>
+        <element name="Result">
+          <complexType>
+            <sequence>
+              <element name="Result" type="string"/>
+              <element name="IdResult" type="string"/>
+              <element name="Description" type="string"/>
+            </sequence>
+          </complexType>
+        </element>
+        <element name="IP">
+          <complexType>
+            <sequence>
+              <element name="MegasSubida" type="string"/>
+              <element name="MegasBajada" type="string"/>
+            </sequence>
+          </complexType>
+        </element>
+      </sequence>
+    </complexType>
+  </element>
+</schema>

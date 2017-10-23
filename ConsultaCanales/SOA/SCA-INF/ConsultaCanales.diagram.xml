@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dgm:gDiagram xmlns:dgm="http://xmlns.oracle.com/sca/soadgm">
+    <dgm:gService name="consultacanales_client_ep">
+        <dgm:body borderWidth="2" arcRad="20" X="21" Y="285" width="137" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="11" Y="278" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:outputPort name="consultacanales_client_ep" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/SalesforceDesa/ConsultaCanales/ConsultaCanales#wsdl.interface(ConsultaCanales)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="20" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>process</dgm:item>
+        </dgm:operations>
+    </dgm:gService>
+    <dgm:gReference name="DP_PlanCiudad-Incluidos">
+        <dgm:body borderWidth="2" arcRad="20" X="638" Y="26" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="628" Y="19" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="DP_PlanCiudad-Incluidos" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/DP_PlanCiudad_Incluidos#wsdl.interface(DP_PlanCiudad-IncluidosPortType)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/salesforce/wizard/images/SfdcCloud_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>query</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="DP_ProductoCaracterstica">
+        <dgm:body borderWidth="2" arcRad="20" X="638" Y="144" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="628" Y="137" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="DP_ProductoCaracterstica" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/DP_ProductoCaracterstica#wsdl.interface(DP_ProductoCaractersticaPortType)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/salesforce/wizard/images/SfdcCloud_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>query</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="DP_PromocionPlan-Parrilla">
+        <dgm:body borderWidth="2" arcRad="20" X="638" Y="262" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="628" Y="255" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="DP_PromocionPlan-Parrilla" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/DP_PromocionPlan_Parrilla#wsdl.interface(DP_PromocionPlan-ParrillaPortType)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/salesforce/wizard/images/SfdcCloud_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>query</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="DP_PromocionServicioProducto">
+        <dgm:body borderWidth="2" arcRad="20" X="638" Y="380" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="628" Y="373" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="DP_PromocionServicioProducto" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/DP_PromocionServicioProducto#wsdl.interface(DP_PromocionServicioProductoPortType)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/salesforce/wizard/images/SfdcCloud_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>query</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="DP_ServicioProducto-Adicional">
+        <dgm:body borderWidth="2" arcRad="20" X="638" Y="498" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="628" Y="491" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="DP_ServicioProducto-Adicional" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/DP_ServicioProducto_Adicional#wsdl.interface(DP_ServicioProducto-AdicionalPortType)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/salesforce/wizard/images/SfdcCloud_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>query</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="Cat_Catalogo">
+        <dgm:body borderWidth="2" arcRad="20" X="638" Y="616" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="628" Y="609" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="Cat_Catalogo" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/Cat_Catalogo#wsdl.interface(Cat_CatalogoPortType)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/salesforce/wizard/images/SfdcCloud_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>query</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gComponent name="ConsultaCanales">
+        <dgm:body borderWidth="2" arcRad="20" X="333" Y="270" width="130" height="186">
+            <dgm:borderColor r="69" g="113" b="140"/>
+            <dgm:lightBgColor r="166" g="208" b="230"/>
+            <dgm:darkBgColor r="99" g="162" b="201"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="323" Y="263" width="150" height="202">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="consultacanales_client" X="-10" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/SalesforceDesa/ConsultaCanales/ConsultaCanales#wsdl.interface(ConsultaCanales)"/>
+        <dgm:outputPort name="DP_PlanCiudad-Incluidos" X="120" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/DP_PlanCiudad_Incluidos#wsdl.interface(DP_PlanCiudad-IncluidosPortType)"/>
+        <dgm:outputPort name="DP_ProductoCaracterstica" X="120" Y="40" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/DP_ProductoCaracterstica#wsdl.interface(DP_ProductoCaractersticaPortType)"/>
+        <dgm:outputPort name="DP_PromocionPlan-Parrilla" X="120" Y="65" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/DP_PromocionPlan_Parrilla#wsdl.interface(DP_PromocionPlan-ParrillaPortType)"/>
+        <dgm:outputPort name="DP_PromocionServicioProducto" X="120" Y="90" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/DP_PromocionServicioProducto#wsdl.interface(DP_PromocionServicioProductoPortType)"/>
+        <dgm:outputPort name="DP_ServicioProducto-Adicional" X="120" Y="115" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/DP_ServicioProducto_Adicional#wsdl.interface(DP_ServicioProducto-AdicionalPortType)"/>
+        <dgm:outputPort name="Cat_Catalogo" X="120" Y="140" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaCanales/Cat_Catalogo#wsdl.interface(Cat_CatalogoPortType)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/bpel/shared/plugins/resources/images/soa/process_20x20.png" X="10" Y="4" width="20" height="20"/>
+    </dgm:gComponent>
+    <dgm:gWireLink source="consultacanales_client_ep" target="ConsultaCanales/consultacanales_client" width="2">
+        <dgm:gSegment X1="168" Y1="295" X2="323" Y2="295"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="ConsultaCanales/DP_PlanCiudad-Incluidos" target="DP_PlanCiudad-Incluidos" width="2">
+        <dgm:gSegment X1="473" Y1="295" X2="497" Y2="295"/>
+        <dgm:gSegment X1="497" Y1="295" X2="497" Y2="36"/>
+        <dgm:gSegment X1="497" Y1="36" X2="628" Y2="36"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="ConsultaCanales/DP_ProductoCaracterstica" target="DP_ProductoCaracterstica" width="2">
+        <dgm:gSegment X1="473" Y1="320" X2="512" Y2="320"/>
+        <dgm:gSegment X1="512" Y1="320" X2="512" Y2="154"/>
+        <dgm:gSegment X1="512" Y1="154" X2="628" Y2="154"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="ConsultaCanales/DP_PromocionPlan-Parrilla" target="DP_PromocionPlan-Parrilla" width="2">
+        <dgm:gSegment X1="473" Y1="345" X2="527" Y2="345"/>
+        <dgm:gSegment X1="527" Y1="345" X2="527" Y2="272"/>
+        <dgm:gSegment X1="527" Y1="272" X2="628" Y2="272"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="ConsultaCanales/DP_PromocionServicioProducto" target="DP_PromocionServicioProducto" width="2">
+        <dgm:gSegment X1="473" Y1="370" X2="527" Y2="370"/>
+        <dgm:gSegment X1="527" Y1="370" X2="527" Y2="390"/>
+        <dgm:gSegment X1="527" Y1="390" X2="628" Y2="390"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="ConsultaCanales/DP_ServicioProducto-Adicional" target="DP_ServicioProducto-Adicional" width="2">
+        <dgm:gSegment X1="473" Y1="395" X2="512" Y2="395"/>
+        <dgm:gSegment X1="512" Y1="395" X2="512" Y2="508"/>
+        <dgm:gSegment X1="512" Y1="508" X2="628" Y2="508"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="ConsultaCanales/Cat_Catalogo" target="Cat_Catalogo" width="2">
+        <dgm:gSegment X1="473" Y1="420" X2="497" Y2="420"/>
+        <dgm:gSegment X1="497" Y1="420" X2="497" Y2="626"/>
+        <dgm:gSegment X1="497" Y1="626" X2="628" Y2="626"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+</dgm:gDiagram>
