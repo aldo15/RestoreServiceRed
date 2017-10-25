@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dgm:gDiagram xmlns:dgm="http://xmlns.oracle.com/sca/soadgm">
     <dgm:gService name="consultamegas_client_ep">
-        <dgm:body borderWidth="2" arcRad="20" X="21" Y="331" width="137" height="84">
+        <dgm:body borderWidth="2" arcRad="20" X="21" Y="192" width="137" height="84">
             <dgm:borderColor r="153" g="153" b="153"/>
             <dgm:bgColor r="255" g="255" b="255"/>
         </dgm:body>
-        <dgm:shadow arcRad="20" X="11" Y="324" width="156" height="98">
+        <dgm:shadow arcRad="20" X="11" Y="185" width="156" height="98">
             <dgm:bgColor r="196" g="228" b="240"/>
         </dgm:shadow>
         <dgm:outputPort name="consultamegas_client_ep" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/SalesforceDesa/ConsultaMegas/ConsultaMegas#wsdl.interface(ConsultaMegas)"/>
@@ -14,40 +14,12 @@
             <dgm:item>process</dgm:item>
         </dgm:operations>
     </dgm:gService>
-    <dgm:gReference name="DP_Plan">
-        <dgm:body borderWidth="2" arcRad="20" X="660" Y="26" width="136" height="84">
-            <dgm:borderColor r="153" g="153" b="153"/>
-            <dgm:bgColor r="255" g="255" b="255"/>
-        </dgm:body>
-        <dgm:shadow arcRad="20" X="650" Y="19" width="156" height="98">
-            <dgm:bgColor r="196" g="228" b="240"/>
-        </dgm:shadow>
-        <dgm:inputPort name="DP_Plan" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegas/DP_Plan#wsdl.interface(DP_PlanPortType)"/>
-        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/salesforce/wizard/images/SfdcCloud_20x20.png" X="27" Y="4" width="20" height="20"/>
-        <dgm:operations>
-            <dgm:item>query</dgm:item>
-        </dgm:operations>
-    </dgm:gReference>
-    <dgm:gReference name="DP_PlanServicio">
-        <dgm:body borderWidth="2" arcRad="20" X="660" Y="144" width="136" height="84">
-            <dgm:borderColor r="153" g="153" b="153"/>
-            <dgm:bgColor r="255" g="255" b="255"/>
-        </dgm:body>
-        <dgm:shadow arcRad="20" X="650" Y="137" width="156" height="98">
-            <dgm:bgColor r="196" g="228" b="240"/>
-        </dgm:shadow>
-        <dgm:inputPort name="DP_PlanServicio" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegas/DP_PlanServicio#wsdl.interface(DP_PlanServicioPortType)"/>
-        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/salesforce/wizard/images/SfdcCloud_20x20.png" X="27" Y="4" width="20" height="20"/>
-        <dgm:operations>
-            <dgm:item>query</dgm:item>
-        </dgm:operations>
-    </dgm:gReference>
     <dgm:gReference name="DP_ProductoCaracteristica">
-        <dgm:body borderWidth="2" arcRad="20" X="660" Y="262" width="136" height="84">
+        <dgm:body borderWidth="2" arcRad="20" X="710" Y="26" width="136" height="84">
             <dgm:borderColor r="153" g="153" b="153"/>
             <dgm:bgColor r="255" g="255" b="255"/>
         </dgm:body>
-        <dgm:shadow arcRad="20" X="650" Y="255" width="156" height="98">
+        <dgm:shadow arcRad="20" X="700" Y="19" width="156" height="98">
             <dgm:bgColor r="196" g="228" b="240"/>
         </dgm:shadow>
         <dgm:inputPort name="DP_ProductoCaracteristica" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegas/DP_ProductoCaracteristica#wsdl.interface(DP_ProductoCaracteristicaPortType)"/>
@@ -57,11 +29,11 @@
         </dgm:operations>
     </dgm:gReference>
     <dgm:gReference name="DP_PromocionPlan">
-        <dgm:body borderWidth="2" arcRad="20" X="660" Y="380" width="136" height="84">
+        <dgm:body borderWidth="2" arcRad="20" X="710" Y="144" width="136" height="84">
             <dgm:borderColor r="153" g="153" b="153"/>
             <dgm:bgColor r="255" g="255" b="255"/>
         </dgm:body>
-        <dgm:shadow arcRad="20" X="650" Y="373" width="156" height="98">
+        <dgm:shadow arcRad="20" X="700" Y="137" width="156" height="98">
             <dgm:bgColor r="196" g="228" b="240"/>
         </dgm:shadow>
         <dgm:inputPort name="DP_PromocionPlan" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegas/DP_PromocionPlan#wsdl.interface(DP_PromocionPlanPortType)"/>
@@ -70,26 +42,12 @@
             <dgm:item>query</dgm:item>
         </dgm:operations>
     </dgm:gReference>
-    <dgm:gReference name="DP_PromocionServicioProducto">
-        <dgm:body borderWidth="2" arcRad="20" X="660" Y="498" width="136" height="84">
-            <dgm:borderColor r="153" g="153" b="153"/>
-            <dgm:bgColor r="255" g="255" b="255"/>
-        </dgm:body>
-        <dgm:shadow arcRad="20" X="650" Y="491" width="156" height="98">
-            <dgm:bgColor r="196" g="228" b="240"/>
-        </dgm:shadow>
-        <dgm:inputPort name="DP_PromocionServicioProducto" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegas/DP_PromocionServicioProducto#wsdl.interface(DP_PromocionServicioProductoPortType)"/>
-        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/salesforce/wizard/images/SfdcCloud_20x20.png" X="27" Y="4" width="20" height="20"/>
-        <dgm:operations>
-            <dgm:item>query</dgm:item>
-        </dgm:operations>
-    </dgm:gReference>
     <dgm:gReference name="DP_ServicioProducto_IncluidosAdicionales">
-        <dgm:body borderWidth="2" arcRad="20" X="660" Y="616" width="136" height="84">
+        <dgm:body borderWidth="2" arcRad="20" X="710" Y="262" width="136" height="84">
             <dgm:borderColor r="153" g="153" b="153"/>
             <dgm:bgColor r="255" g="255" b="255"/>
         </dgm:body>
-        <dgm:shadow arcRad="20" X="650" Y="609" width="156" height="98">
+        <dgm:shadow arcRad="20" X="700" Y="255" width="156" height="98">
             <dgm:bgColor r="196" g="228" b="240"/>
         </dgm:shadow>
         <dgm:inputPort name="DP_ServicioProducto_IncluidosAdicionales" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegas/DP_ServicioProducto_IncluidosAdicionales#wsdl.interface(DP_ServicioProducto_IncluidosAdicionalesPortType)"/>
@@ -99,11 +57,11 @@
         </dgm:operations>
     </dgm:gReference>
     <dgm:gReference name="DP_ServicioProducto-Promocion">
-        <dgm:body borderWidth="2" arcRad="20" X="660" Y="734" width="136" height="84">
+        <dgm:body borderWidth="2" arcRad="20" X="710" Y="380" width="136" height="84">
             <dgm:borderColor r="153" g="153" b="153"/>
             <dgm:bgColor r="255" g="255" b="255"/>
         </dgm:body>
-        <dgm:shadow arcRad="20" X="650" Y="727" width="156" height="98">
+        <dgm:shadow arcRad="20" X="700" Y="373" width="156" height="98">
             <dgm:bgColor r="196" g="228" b="240"/>
         </dgm:shadow>
         <dgm:inputPort name="DP_ServicioProducto-Promocion" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegas/DP_ServicioProducto_Promocion#wsdl.interface(DP_ServicioProducto-PromocionPortType)"/>
@@ -113,75 +71,51 @@
         </dgm:operations>
     </dgm:gReference>
     <dgm:gComponent name="ConsultaMegas">
-        <dgm:body borderWidth="2" arcRad="20" X="344" Y="316" width="130" height="211">
+        <dgm:body borderWidth="2" arcRad="20" X="369" Y="177" width="130" height="136">
             <dgm:borderColor r="69" g="113" b="140"/>
             <dgm:lightBgColor r="166" g="208" b="230"/>
             <dgm:darkBgColor r="99" g="162" b="201"/>
         </dgm:body>
-        <dgm:shadow arcRad="20" X="334" Y="309" width="150" height="227">
+        <dgm:shadow arcRad="20" X="359" Y="170" width="150" height="152">
             <dgm:bgColor r="196" g="228" b="240"/>
         </dgm:shadow>
         <dgm:inputPort name="consultamegas_client" X="-10" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/SalesforceDesa/ConsultaMegas/ConsultaMegas#wsdl.interface(ConsultaMegas)"/>
-        <dgm:outputPort name="DP_Plan" X="120" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegas/DP_Plan#wsdl.interface(DP_PlanPortType)"/>
-        <dgm:outputPort name="DP_PlanServicio" X="120" Y="40" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegas/DP_PlanServicio#wsdl.interface(DP_PlanServicioPortType)"/>
-        <dgm:outputPort name="DP_ProductoCaracteristica" X="120" Y="65" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegas/DP_ProductoCaracteristica#wsdl.interface(DP_ProductoCaracteristicaPortType)"/>
-        <dgm:outputPort name="DP_PromocionPlan" X="120" Y="90" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegas/DP_PromocionPlan#wsdl.interface(DP_PromocionPlanPortType)"/>
-        <dgm:outputPort name="DP_PromocionServicioProducto" X="120" Y="115" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegas/DP_PromocionServicioProducto#wsdl.interface(DP_PromocionServicioProductoPortType)"/>
-        <dgm:outputPort name="DP_ServicioProducto_IncluidosAdicionales" X="120" Y="140" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegas/DP_ServicioProducto_IncluidosAdicionales#wsdl.interface(DP_ServicioProducto_IncluidosAdicionalesPortType)"/>
-        <dgm:outputPort name="DP_ServicioProducto-Promocion" X="120" Y="165" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegas/DP_ServicioProducto_Promocion#wsdl.interface(DP_ServicioProducto-PromocionPortType)"/>
+        <dgm:outputPort name="DP_ProductoCaracteristica" X="120" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegas/DP_ProductoCaracteristica#wsdl.interface(DP_ProductoCaracteristicaPortType)"/>
+        <dgm:outputPort name="DP_PromocionPlan" X="120" Y="40" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegas/DP_PromocionPlan#wsdl.interface(DP_PromocionPlanPortType)"/>
+        <dgm:outputPort name="DP_ServicioProducto_IncluidosAdicionales" X="120" Y="65" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegas/DP_ServicioProducto_IncluidosAdicionales#wsdl.interface(DP_ServicioProducto_IncluidosAdicionalesPortType)"/>
+        <dgm:outputPort name="DP_ServicioProducto-Promocion" X="120" Y="90" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegas/DP_ServicioProducto_Promocion#wsdl.interface(DP_ServicioProducto-PromocionPortType)"/>
         <dgm:nodeIcon URI="/oracle/tip/tools/ide/bpel/shared/plugins/resources/images/soa/process_20x20.png" X="10" Y="4" width="20" height="20"/>
     </dgm:gComponent>
     <dgm:gWireLink source="consultamegas_client_ep" target="ConsultaMegas/consultamegas_client" width="2">
-        <dgm:gSegment X1="168" Y1="341" X2="334" Y2="341"/>
-        <dgm:baseColor r="153" g="153" b="153"/>
-        <dgm:selectedColor r="49" g="106" b="196"/>
-    </dgm:gWireLink>
-    <dgm:gWireLink source="ConsultaMegas/DP_Plan" target="DP_Plan" width="2">
-        <dgm:gSegment X1="484" Y1="341" X2="508" Y2="341"/>
-        <dgm:gSegment X1="508" Y1="341" X2="508" Y2="36"/>
-        <dgm:gSegment X1="508" Y1="36" X2="650" Y2="36"/>
-        <dgm:baseColor r="153" g="153" b="153"/>
-        <dgm:selectedColor r="49" g="106" b="196"/>
-    </dgm:gWireLink>
-    <dgm:gWireLink source="ConsultaMegas/DP_PlanServicio" target="DP_PlanServicio" width="2">
-        <dgm:gSegment X1="484" Y1="366" X2="523" Y2="366"/>
-        <dgm:gSegment X1="523" Y1="366" X2="523" Y2="154"/>
-        <dgm:gSegment X1="523" Y1="154" X2="650" Y2="154"/>
+        <dgm:gSegment X1="168" Y1="202" X2="359" Y2="202"/>
         <dgm:baseColor r="153" g="153" b="153"/>
         <dgm:selectedColor r="49" g="106" b="196"/>
     </dgm:gWireLink>
     <dgm:gWireLink source="ConsultaMegas/DP_ProductoCaracteristica" target="DP_ProductoCaracteristica" width="2">
-        <dgm:gSegment X1="484" Y1="391" X2="538" Y2="391"/>
-        <dgm:gSegment X1="538" Y1="391" X2="538" Y2="272"/>
-        <dgm:gSegment X1="538" Y1="272" X2="650" Y2="272"/>
+        <dgm:gSegment X1="509" Y1="202" X2="533" Y2="202"/>
+        <dgm:gSegment X1="533" Y1="202" X2="533" Y2="36"/>
+        <dgm:gSegment X1="533" Y1="36" X2="700" Y2="36"/>
         <dgm:baseColor r="153" g="153" b="153"/>
         <dgm:selectedColor r="49" g="106" b="196"/>
     </dgm:gWireLink>
     <dgm:gWireLink source="ConsultaMegas/DP_PromocionPlan" target="DP_PromocionPlan" width="2">
-        <dgm:gSegment X1="484" Y1="416" X2="553" Y2="416"/>
-        <dgm:gSegment X1="553" Y1="416" X2="553" Y2="390"/>
-        <dgm:gSegment X1="553" Y1="390" X2="650" Y2="390"/>
-        <dgm:baseColor r="153" g="153" b="153"/>
-        <dgm:selectedColor r="49" g="106" b="196"/>
-    </dgm:gWireLink>
-    <dgm:gWireLink source="ConsultaMegas/DP_PromocionServicioProducto" target="DP_PromocionServicioProducto" width="2">
-        <dgm:gSegment X1="484" Y1="441" X2="538" Y2="441"/>
-        <dgm:gSegment X1="538" Y1="441" X2="538" Y2="508"/>
-        <dgm:gSegment X1="538" Y1="508" X2="650" Y2="508"/>
+        <dgm:gSegment X1="509" Y1="227" X2="548" Y2="227"/>
+        <dgm:gSegment X1="548" Y1="227" X2="548" Y2="154"/>
+        <dgm:gSegment X1="548" Y1="154" X2="700" Y2="154"/>
         <dgm:baseColor r="153" g="153" b="153"/>
         <dgm:selectedColor r="49" g="106" b="196"/>
     </dgm:gWireLink>
     <dgm:gWireLink source="ConsultaMegas/DP_ServicioProducto_IncluidosAdicionales" target="DP_ServicioProducto_IncluidosAdicionales" width="2">
-        <dgm:gSegment X1="484" Y1="466" X2="523" Y2="466"/>
-        <dgm:gSegment X1="523" Y1="466" X2="523" Y2="626"/>
-        <dgm:gSegment X1="523" Y1="626" X2="650" Y2="626"/>
+        <dgm:gSegment X1="509" Y1="252" X2="548" Y2="252"/>
+        <dgm:gSegment X1="548" Y1="252" X2="548" Y2="272"/>
+        <dgm:gSegment X1="548" Y1="272" X2="700" Y2="272"/>
         <dgm:baseColor r="153" g="153" b="153"/>
         <dgm:selectedColor r="49" g="106" b="196"/>
     </dgm:gWireLink>
     <dgm:gWireLink source="ConsultaMegas/DP_ServicioProducto-Promocion" target="DP_ServicioProducto-Promocion" width="2">
-        <dgm:gSegment X1="484" Y1="491" X2="508" Y2="491"/>
-        <dgm:gSegment X1="508" Y1="491" X2="508" Y2="744"/>
-        <dgm:gSegment X1="508" Y1="744" X2="650" Y2="744"/>
+        <dgm:gSegment X1="509" Y1="277" X2="533" Y2="277"/>
+        <dgm:gSegment X1="533" Y1="277" X2="533" Y2="390"/>
+        <dgm:gSegment X1="533" Y1="390" X2="700" Y2="390"/>
         <dgm:baseColor r="153" g="153" b="153"/>
         <dgm:selectedColor r="49" g="106" b="196"/>
     </dgm:gWireLink>

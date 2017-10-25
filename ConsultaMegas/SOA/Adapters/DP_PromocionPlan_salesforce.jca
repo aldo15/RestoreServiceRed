@@ -1,21 +1,20 @@
-<?xml version='1.0' encoding='UTF-8'?>
 <adapter-config name="DP_PromocionPlanPortType" adapter="salesforce" wsdlLocation="../WSDLs/DP_PromocionPlan.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
-   <connection-factory location="cloud/CloudAdapter">
-      <non-managed-connection managedConnectionFactoryClassName="oracle.cloud.connector.salesforce.SalesforceConnectionFactory">
-         <property name="targetWSDLURL" value="../WSDLs/enterpriseProd3.0.wsdl"/>
-         <property name="csfkey" value="keySalesforceProd"/>
-         <property name="csfMap" value="SOA"/>
-         <property name="applicationVersion" value="38.0"/>
-      </non-managed-connection>
-   </connection-factory>
-   <endpoint-interaction portType="DP_PromocionPlanPortType" operation="query">
-      <interaction-spec className="oracle.tip.adapter.cloud.CloudInteractionSpec">
-         <property name="targetOperation" value="query"/>
-         <property name="operationPath" value=""/>
-         <property name="oracle.cloud.rt.sfdcAdapterNamespace" value="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegas/DP_PromocionPlan#new"/>
-         <property name="selectedObjects" value="DP_PromocionPlan__c,QueryParameters"/>
-         <property name="oracle.cloud.rt.queryString" value="SELECT   Id,   Name,   DP_Plan__c,   DP_Plan__r.Name,   DP_Plan__r.IdPlanBRM__c,   DP_Promocion__c,   DP_Promocion__r.IdPromocion__c FROM DP_PromocionPlan__c WHERE  DP_Plan__r.IdPlanBRM__c = '&amp;IdPlanBRM__c' AND DP_Promocion__r.IdPromocion__c = '&amp;IdPromocion__c'"/>
-         <property name="oracle.cloud.rt.suppressResponse" value="false"/>
-      </interaction-spec>
-   </endpoint-interaction>
+  <connection-factory location="cloud/CloudAdapter">
+    <non-managed-connection managedConnectionFactoryClassName="oracle.cloud.connector.salesforce.SalesforceConnectionFactory">
+      <property name="targetWSDLURL" value="../WSDLs/enterpriseQA18.0.wsdl"/>
+      <property name="csfkey" value="keySalesforceQA"/>
+      <property name="csfMap" value="SOA"/>
+      <property name="applicationVersion" value="41.0"/>
+    </non-managed-connection>
+  </connection-factory>
+  <endpoint-interaction portType="DP_PromocionPlanPortType" operation="query">
+    <interaction-spec className="oracle.tip.adapter.cloud.CloudInteractionSpec">
+      <property name="targetOperation" value="query"/>
+      <property name="operationPath" value=""/>
+      <property name="oracle.cloud.rt.sfdcAdapterNamespace" value="http://xmlns.oracle.com/pcbpel/adapter/salesforce/SalesforceDesa/ConsultaMegas/DP_PromocionPlan#new"/>
+      <property name="selectedObjects" value="DP_PromocionServicioProducto__c,QueryParameters"/>
+      <property name="oracle.cloud.rt.queryString" value="SELECT   Id,   Name,   DP_PromocionPlan__c,   DP_ProductoCaracteristica__c,   DP_ServicioProducto__c FROM DP_PromocionServicioProducto__c WHERE DP_PromocionPlan__c IN (SELECT   Id FROM DP_PromocionPlan__c WHERE DP_Plan__r.IdPlanBRM__c = '&amp;IdPlanBRM__c' AND DP_Promocion__r.IdPromocion__c = '&amp;IdPromocion')"/>
+      <property name="oracle.cloud.rt.suppressResponse" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
 </adapter-config>
