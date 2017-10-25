@@ -396,8 +396,16 @@
                             <empty name="Empty1"/>
                             <assign name="AssOurput">
                               <copy>
-                                <from>'Success operation'</from>
+                                <from>'Es promocion'</from>
                                 <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:Result/client:Description</to>
+                              </copy>
+                              <copy>
+                                <from>'0'</from>
+                                <to>$outputVariable.payload/client:Result/client:Result</to>
+                              </copy>
+                              <copy>
+                                <from>'0'</from>
+                                <to>$outputVariable.payload/client:Result/client:IdResult</to>
                               </copy>
                             </assign>
                           </sequence>
